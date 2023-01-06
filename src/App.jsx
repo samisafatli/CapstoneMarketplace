@@ -1,3 +1,4 @@
+import './index.scss'
 import CategoryList from './components/category-list/categoryList'
 
 const App = () => {
