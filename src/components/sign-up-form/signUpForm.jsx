@@ -19,7 +19,7 @@ const SignUpForm = () => {
   const { displayName, email, password, confirmPassword } = formFields
 
   const resetFormFields = () => {
-    setFormFields({})
+    setFormFields(defaultFormFields)
   }
 
   const handleChange = event => {
@@ -35,13 +35,14 @@ const SignUpForm = () => {
       return
     } try {
       const { user } = await createAuthUserWithEmailAndPassword(email, password)
+
       await createUserDocumentFromAuth(user, { displayName })
+      resetFormFields()
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') alert('Email already in use')
       if (error.code === 'auth/weak-password') alert('Password too weak')
       console.log(error)
     }
-    resetFormFields()
   }
 
   return (
